@@ -44,7 +44,8 @@ To be able to use anomaly detection, you just need to collect data for what is c
 
 I followed [this tutorial](https://docs.edgeimpulse.com/docs/development-platforms/officially-supported-mcu-targets/arduino-nicla-sense-me) on the Nicla to get up and running. The Edge Impulse-provided nicla_sense_ingestion.ino sketch was used to collect accelometer data.
 
-I started to collect 8 seconds long samples when walking, running, etc. To get a feeling for how the anomaly detection model works, I only collected 1m 17s of data, with the intention of collecting at least 10 times more data later on. Astonishingly, I soon found out that this tiny data amount was enough for this proof of concept! Obviously, in a real scenario you would need to secure you have covered all the expected different types of activities a person might get involved in.
+I started to collect 8 seconds long samples when walking, running, etc. For the sake of simplicity, I had the Nicla device tethered through USB to a laptop as the alternative would have been to use a more complex data gathering program using BLE. 
+I thus held Nicla in one hand and my laptop in the other and started walking and jogging indoors. To get a feeling for how the anomaly detection model works, I only collected 1m 17s of data, with the intention of collecting at least 10 times more data later on. Astonishingly, I soon found out that this tiny data amount was enough for this proof of concept! Obviously, in a real scenario you would need to secure you have covered all the expected different types of activities a person might get involved in.
 
 
 ## Impulse
@@ -52,19 +53,28 @@ Through a heuristical approach I found out that the optimal window size and incr
 
  ![](fall_det_04.png)
 
-## Anomaly detection
+## Anomaly detection in Edge Impulse
 As this ML model was new to me, it was easiest to train it using the default settings. While I'm quite sure the model might be further tuned and optimized, especially after collecting more data and from different activities, the trained model was again of surprisingly good quality considering the few minutes I'd spent on it.
+
+ ![](fall_det_04_2.png)
 
 ## Deployment to Nicla
 The deployment part consisted of creating an Arduino library that can be used with the example program provided by Edge Impulse. Initially I struggled to find the correct program from the library, but found out that I just needed to restart the Arduino IDE to be able to find the file, duh!
 
-Next in line was to find a suitable threshold for when I consider an anomaly (= fall) detected. Again, with a heuristical approach I found an anomaly score of 50 to be a good threshold. To be able to walk around without Nicla being tethered to a computer, I adapted the program so the LED shoned with red colour when I simulated a fall by shaking the device.
+Next in line was to find a suitable threshold for when I consider an anomaly (= fall) detected. Again, with a heuristical approach I found an anomaly score of 50 to be a good threshold. To be able to walk around without Nicla being tethered to a computer, I adapted the program so the LED light blinks in red when I simulated a fall by shaking the device.
 
 Until now, most steps in the process had been pretty straightforward with only some basic research and trial & error needed. Luckily, I had been prewarned by another [Nicla expert](https://docs.edgeimpulse.com/experts/featured-machine-learning-projects/arduino-kway-gesture-recognition-weather) that running inference and Bluetooth simultaneously might cause memory issues on this 64 kB SRAM device. This I experienced myself, but with the help of this [forum post](https://forum.edgeimpulse.com/t/nicla-sense-me-running-out-of-memory/6344/11), this challenge was overcome.
 
-## Software on the Bangle smartwatch
+## Software on the Bangle smartwatch and demonstration
 To be able to simulate an emergency call being made, I created a simple Javascript program on the smartwatch. This program connects through BLE to Nicla and receives the anomaly score. Once the score is over 50, the watch will react by turning on the LCD and displaying `FALL DETECTED!`. After a few seconds a counter will decrease from 10 to 0, and if the wearer has not touched the display when the counter turns to zero, the watch is simulating an emergency call to a predefined number chosen by the user.
 
+The following pictures show the fall detection process:
+- a fall is registered (= an anomaly detected) - in this case due to shaking the Nicla device, the LED blinks in red colour
+- Nicla sends the anomaly score to the Bangle watch through BLE
+- the Bangle watch also shows a fall is detected, starts counting down to zero
+- if the screen has not been touched - indicating the user is immobile, an emergency call is being made
+
+![](fall_det_07.png)
 ![](fall_det_08.png)
 ![](fall_det_09.png)
 ![](fall_det_10.png)
