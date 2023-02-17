@@ -6,7 +6,7 @@ This project will showcase how the K-Way jacket & Arduino Nicla Sense ME system,
 
 ## Background and needs analysis
 
-In Finland, having 5.5 million people, the yearly mortality rate due to accidental falls is around 1200 persons. Approximately 50 % of the mortal falls are happening indoors, and 50 % outdoors. The reasons for the falls are varying, but what is clear is that the older a person gets, the higher the risk is that she/he first of all falls, and secondly that the fall might be fatal. Falling is the most common accidental cause of death for people over 65 years in Finland *(source ukkinstituutti.fi)*. In addition to the tragical deaths, the total amount of 390000 yearly falls *(source Red Cross)* are leading to human suffering and huge health care costs for the society.
+In Finland, with a population of 5.5 million, the yearly mortality rate due to accidental falls is around 1200 persons. Approximately 50 % of the mortal falls are happening indoors, and 50 % outdoors. The reasons for the falls are varying, but what is clear is that the older a person gets, the higher the risk is that she/he first of all falls, and secondly that the fall might be fatal. Falling is the most common accidental cause of death for people over 65 years in Finland *(source ukkinstituutti.fi)*. In addition to the tragical deaths, the total amount of 390000 yearly falls *(source Red Cross)* are leading to human suffering and huge health care costs for the society.
 
  ![](fall_det_01.png)
 
