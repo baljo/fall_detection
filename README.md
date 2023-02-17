@@ -1,6 +1,6 @@
 # Arduino x K-Way - Fall detection
 
-This project will showcase how the K-Way jacket & Arduino Nicla Sense ME system, together with a smartwatch, can be used to detect falls and call for assistance in case needed.
+This project will showcase how the K-Way jacket & Arduino Nicla Sense ME device, together with a smartwatch, can be used to detect falls and call for assistance in case needed.
 
 [Video showing a simulated emergency call due to a sudden fall](https://youtube.com/shorts/9HECGjsQs8I)
 
